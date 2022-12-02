@@ -24,10 +24,7 @@ public class Application {
 				.hub("testHub")
 				.buildClient();
 
-		WebPubSubClientAccessToken token = pubSubClient.getClientAccessToken(new GetClientAccessTokenOptions());
-		System.out.println(String.format("Token URL: %s", token.getUrl()));
-
-		WebSocketClient webSocketClient = InitializeWebSocketSubscriber();
+		InitializeWebSocketSubscriber();
 
 		System.out.println("Subscriber Initialized");
 
@@ -37,8 +34,10 @@ public class Application {
 
 	}
 
+	// This should be blocking. Events are out of order.
 	public static WebSocketClient InitializeWebSocketSubscriber() throws URISyntaxException {
 		WebPubSubClientAccessToken token = pubSubClient.getClientAccessToken(new GetClientAccessTokenOptions());
+		System.out.println(String.format("Token URL: %s", token.getUrl()));
 
 		WebSocketClient client = new WebSocketClient(new URI(token.getUrl())) {
 			@Override
