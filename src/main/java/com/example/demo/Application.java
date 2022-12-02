@@ -37,7 +37,7 @@ public class Application {
 	// This should be blocking. Events are out of order.
 	public static WebSocketClient InitializeWebSocketSubscriber() throws URISyntaxException {
 		WebPubSubClientAccessToken token = pubSubClient.getClientAccessToken(new GetClientAccessTokenOptions());
-		System.out.println(String.format("Token URL: %s", token.getUrl()));
+		System.out.println(String.format("Token URL: %s", token.getUrl())); // ! Unsafe log
 
 		WebSocketClient client = new WebSocketClient(new URI(token.getUrl())) {
 			@Override
